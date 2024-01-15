@@ -41,14 +41,14 @@ labels_dict = {0:"O", 1:"B-ADAGE", 2:"I-ADAGE", 3:"B-ART", 4:"I-ART", 5:"B-CARDI
         47:"B-QUANTITY", 48:"I-QUANTITY", 49:"B-TIME", 50:"I-TIME"}
 
 #Tokenize input sentence for BERT
-tokenizer = AutoTokenizer.from_pretrained(model_checkpoint)
+tokenizer = AutoTokenizer.from_pretrained(model_checkpoint,local_files_only=True)
 assert isinstance(tokenizer, transformers.PreTrainedTokenizerFast)
 
 tokenized_inputs = tokenizer(input_sent, return_tensors="pt")
 #tokenizer.convert_ids_to_tokens(tokenized_inputs['input_ids'][0])
 
 #Load model
-model = AutoModelForTokenClassification.from_pretrained(model_checkpoint)
+model = AutoModelForTokenClassification.from_pretrained(model_checkpoint,local_files_only=True)
 
 #Predict
 output = model(**tokenized_inputs)
